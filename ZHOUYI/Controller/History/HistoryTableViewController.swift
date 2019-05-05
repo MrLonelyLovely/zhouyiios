@@ -15,6 +15,9 @@ class HistoryTableViewController: UITableViewController {
     var resultPage: Int = 1
     let RowHeight: CGFloat = 50
     
+    //刷新控件
+    var refresher: UIRefreshControl!
+    
     @IBAction func Exit (_ segue: UIStoryboardSegue) {
         if let selectIndexPath = tableView.indexPathForSelectedRow {
             deleteRecord(id: (resultList[selectIndexPath.row].id)!, row: selectIndexPath.row)
@@ -28,6 +31,25 @@ class HistoryTableViewController: UITableViewController {
         if !(GlobalUser.online ?? false) && (GlobalUser.login ?? false) {
             authenticateToken()
         }
+        
+        
+        
+//        self.tableView.alwaysBounceVertical = true
+        
+//        if !(GlobalUser.online ?? false) {
+//            return
+//        } else {
+//            resultList = []
+//            self.resultPage = 1
+//            loadHistory(page: resultPage)
+//        }
+        
+        loadHistory(page: resultPage)
+        tableView.reloadData()
+        
+        refresher = UIRefreshControl()
+        refresher?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        tableView?.addSubview(refresher)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -42,8 +64,12 @@ class HistoryTableViewController: UITableViewController {
             resultList = []
             self.resultPage = 1
             loadHistory(page: resultPage)
+            tableView.reloadData()
         }
+        
+        
     }
+    
     
     // 验证token，如果token有效则尝试自动登录
     func authenticateToken () {
@@ -101,10 +127,17 @@ class HistoryTableViewController: UITableViewController {
                     let record = respJson.object(forKey: "record") as! [AnyObject]
                     self.resultPage += 1
                     DispatchQueue.main.async {
+//                        for s in stride(from: 0, to:record.count, by: -1) {
+//                            self.resultList.append(Gua(initJson: s as AnyObject))
+//                        }
+                        //实现从最新的记录开始从上往下加载显示
+//                        .reversed()
                         for s in record {
                             self.resultList.append(Gua(initJson: s))
+                            self.tableView.reloadData()
+//                            self.resultList.first = Gua(initJson: s)
                         }
-                        self.tableView.reloadData()
+                        
                     }
                 }
             } catch {
@@ -177,17 +210,18 @@ class HistoryTableViewController: UITableViewController {
         return resultList.count
     }
 
-    
+    //tableView.reloadData()后会调用该方法
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
         let reason = resultList[indexPath.row].reason
-        if reason?.count ?? 0 > 15 {
-            let r = reason?.prefix(15)
-            cell.textLabel?.text = String(r!) + "..."
+        if reason?.count ?? 0 > 15 {         //此为超过15个字符的情况
+            let r = reason?.prefix(15)      //截取reason文本的前15个字符
+            cell.textLabel?.text = String(r!) + "..."     //则显示为前15个字符+“...”
         } else {
             cell.textLabel?.text = reason
         }
         cell.detailTextLabel?.text = resultList[indexPath.row].name! + "(" + self.getWeek(date: resultList[indexPath.row].date!) + ")"
+
         return cell
     }
     
@@ -250,5 +284,19 @@ class HistoryTableViewController: UITableViewController {
         }
     }
  
+    @objc func refresh() {
+        loadHistory(page: resultPage)
+        tableView?.reloadData()
+        
+        //停止刷新动画
+        refresher.endRefreshing()
+    }
 
+    func loadMore() {
+        //只要是page的数量小于等于帖子的数量，则让用户在每次拉拽集合视图到底部的时候，让page的数量加12
+        if resultPage <= resultList.count {
+            resultPage = resultPage + 12
+            
+        }
+    }
 }

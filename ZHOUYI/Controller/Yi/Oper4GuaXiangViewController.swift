@@ -86,7 +86,7 @@ class Oper4GuaXiangViewController: UIViewController {
     
     @IBAction func ClickS0Button(_ sender: Any) {
 //        S0Button.addTarget(self, action: #selector(buttonState(sender:)), for: .touchUpInside)
-        S0Button.isHighlighted = true
+        S0Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == UIColor.lightGray {
             benShangGuaImageView.image = UIImage(named: "qian000")
             shangGuaShuZi = "000"
@@ -100,7 +100,7 @@ class Oper4GuaXiangViewController: UIViewController {
     }
     @IBAction func ClickS1Button(_ sender: Any) {
 //        S1Button.addTarget(self, action: #selector(buttonState(sender:)), for: .touchUpInside)
-        S1Button.isHighlighted = true
+        S1Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "dui100")
             shangGuaShuZi = "100"
@@ -113,7 +113,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: 1, x: isBenGua ? guaXiangSelect[1] : guaXiangSelect[3])
     }
     @IBAction func ClickS2Button(_ sender: Any) {
-        S2Button.isHighlighted = true
+        S2Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "li010")
             shangGuaShuZi = "010"
@@ -126,7 +126,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: 2, x: isBenGua ? guaXiangSelect[1] : guaXiangSelect[3])
     }
     @IBAction func ClickS3Button(_ sender: Any) {
-        S3Button.isHighlighted = true
+        S3Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "zhen110")
             shangGuaShuZi = "110"
@@ -139,7 +139,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: 3, x: isBenGua ? guaXiangSelect[1] : guaXiangSelect[3])
     }
     @IBAction func ClickS4Button(_ sender: Any) {
-        S4Button.isHighlighted = true
+        S4Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "ji001")
             shangGuaShuZi = "001"
@@ -152,7 +152,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: 4, x: isBenGua ? guaXiangSelect[1] : guaXiangSelect[3])
     }
     @IBAction func ClickS5Button(_ sender: Any) {
-        S5Button.isHighlighted = true
+        S5Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "kan101")
             shangGuaShuZi = "101"
@@ -165,7 +165,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: 5, x: isBenGua ? guaXiangSelect[1] : guaXiangSelect[3])
     }
     @IBAction func ClickS6Button(_ sender: Any) {
-        S6Button.isHighlighted = true
+        S6Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "gen011")
             shangGuaShuZi = "011"
@@ -178,7 +178,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: 6, x: isBenGua ? guaXiangSelect[1] : guaXiangSelect[3])
     }
     @IBAction func ClickS7Button(_ sender: Any) {
-        S7Button.isHighlighted = true
+        S7Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benShangGuaImageView.image = UIImage(named: "kun111")
             shangGuaShuZi = "111"
@@ -192,7 +192,7 @@ class Oper4GuaXiangViewController: UIViewController {
     }
     
     @IBAction func ClickX0Button(_ sender: Any) {
-        X0Button.isHighlighted = true
+        X0Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "qian000")
             xiaGuaShuZi = "000"
@@ -206,7 +206,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 0)
     }
     @IBAction func ClickX1Button(_ sender: Any) {
-        X1Button.isHighlighted = true
+        X1Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "dui100")
             xiaGuaShuZi = "100"
@@ -219,7 +219,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 1)
     }
     @IBAction func ClickX2Button(_ sender: Any) {
-        X2Button.isHighlighted = true
+        X2Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "li010")
             xiaGuaShuZi = "010"
@@ -232,7 +232,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 2)
     }
     @IBAction func ClickX3Button(_ sender: Any) {
-        X3Button.isHighlighted = true
+        X3Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "zhen110")
             xiaGuaShuZi = "110"
@@ -245,7 +245,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 3)
     }
     @IBAction func ClickX4Button(_ sender: Any) {
-        X4Button.isHighlighted = true
+        X4Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "ji001")
             xiaGuaShuZi = "001"
@@ -258,7 +258,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 4)
     }
     @IBAction func ClickX5Button(_ sender: Any) {
-        X5Button.isHighlighted = true
+        X5Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "kan101")
             xiaGuaShuZi = "101"
@@ -271,7 +271,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 5)
     }
     @IBAction func ClickX6Button(_ sender: Any) {
-        X6Button.isHighlighted = true
+        X6Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "gen011")
             xiaGuaShuZi = "011"
@@ -284,7 +284,7 @@ class Oper4GuaXiangViewController: UIViewController {
         reloadView(s: isBenGua ? guaXiangSelect[0] : guaXiangSelect[2], x: 6)
     }
     @IBAction func ClickX7Button(_ sender: Any) {
-        X7Button.isHighlighted = true
+        X7Button.backgroundColor = BlueColor
         if benGuaImageDoubleView.backgroundColor == BlueColor {
             benXiaGuaImageView.image = UIImage(named: "kun111")
             xiaGuaShuZi = "111"
@@ -361,6 +361,8 @@ class Oper4GuaXiangViewController: UIViewController {
 //        benXiaGuaImageView.backgroundColor = BlueColor
         
         benGuaImageDoubleView.backgroundColor = BlueColor
+        S0Button.backgroundColor = BlueColor
+        X0Button.backgroundColor = BlueColor
         
         let benGuaTap = UITapGestureRecognizer(target: self, action: #selector(benGuaTapped))
         benGuaTap.numberOfTapsRequired = 1
@@ -378,35 +380,35 @@ class Oper4GuaXiangViewController: UIViewController {
     func reloadView(s: Int, x: Int) {
         if isBenGua {
             if s != guaXiangSelect[0] {
-//                SButtonList[guaXiangSelect[0]].backgroundColor = WhiteColor
-//                SButtonList[s].backgroundColor = BlueColor
-                SButtonList[guaXiangSelect[0]].isHighlighted = false
-                SButtonList[s].isHighlighted = true
+                SButtonList[guaXiangSelect[0]].backgroundColor = WhiteColor
+                SButtonList[s].backgroundColor = BlueColor
+//                SButtonList[guaXiangSelect[0]].isHighlighted = false
+//                SButtonList[s].isHighlighted = true
                 guaXiangSelect[0] = s
                 guaXiang[0] = GuaXiangList[guaXiangSelect[0]]
             }
             if x != guaXiangSelect[1] {
                 XButtonList[guaXiangSelect[1]].backgroundColor = WhiteColor
                 XButtonList[x].backgroundColor = BlueColor
-                XButtonList[guaXiangSelect[1]].isHighlighted = false
-                XButtonList[x].isHighlighted = true
+//                XButtonList[guaXiangSelect[1]].isHighlighted = false
+//                XButtonList[x].isHighlighted = true
                 guaXiangSelect[1] = x
                 guaXiang[1] = GuaXiangList[guaXiangSelect[1]]
             }
         } else {
             if s != guaXiangSelect[2] {
-//                SButtonList[guaXiangSelect[2]].backgroundColor = WhiteColor
-//                SButtonList[s].backgroundColor = BlueColor
-                SButtonList[guaXiangSelect[2]].isHighlighted = false
-                SButtonList[s].isHighlighted = true
+                SButtonList[guaXiangSelect[2]].backgroundColor = WhiteColor
+                SButtonList[s].backgroundColor = BlueColor
+//                SButtonList[guaXiangSelect[2]].isHighlighted = false
+//                SButtonList[s].isHighlighted = true
                 guaXiangSelect[2] = s
                 guaXiang[2] = GuaXiangList[guaXiangSelect[2]]
             }
             if x != guaXiangSelect[3] {
-                XButtonList[guaXiangSelect[3]].backgroundColor = WhiteColor
-                XButtonList[x].backgroundColor = BlueColor
-//                XButtonList[guaXiangSelect[3]].isHighlighted = false
-//                XButtonList[x].isHighlighted = true
+//                XButtonList[guaXiangSelect[3]].backgroundColor = WhiteColor
+//                XButtonList[x].backgroundColor = BlueColor
+                XButtonList[guaXiangSelect[3]].isHighlighted = false
+                XButtonList[x].isHighlighted = true
                 guaXiangSelect[3] = x
                 guaXiang[3] = GuaXiangList[guaXiangSelect[3]]
             }

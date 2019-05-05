@@ -155,18 +155,6 @@ class UserInfoViewController: UIViewController, UITableViewDelegate, UITableView
             alert.addAction(yAction)
             alert.addAction(nAction)
             self.present(alert, animated: true, completion: nil)
-//            let dateFormat = DateFormatter()
-//
-//            dateFormat.dateFormat = "yyyy-MM-dd-HH-mm-ss"
-//            let t = separateTime(time: dateFormat.string(from: .init()))
-            //        let yyyyMMddFormat = DateFormatter()
-            //        yyyyMMddFormat.dateFormat = "yyyy-MM-dd"
-            //        DateButton.setTitle(dateFormat.string(from: .init()), for: .normal)
-//            tableView.cellForRow(at: indexPath)?.textLabel!.text = t[0] + "-" + t[1] + "-" + t[2]
-//            tableView.cellForRow(at: indexPath)?.detailTextLabel!.text = t[0] + "-" + t[1] + "-" + t[2]
-//            setTitle(t[0] + "-" + t[1] + "-" + t[2], for: .normal)
-//            selectDate()
-//            reloadView()
             break;
         default:
             break;
