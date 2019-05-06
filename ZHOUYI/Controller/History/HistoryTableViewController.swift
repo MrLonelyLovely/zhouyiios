@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftHTTP
-//阿沛的
+//阿沛的回滚到正常版本
 
 class HistoryTableViewController: UITableViewController {
     
@@ -21,7 +21,7 @@ class HistoryTableViewController: UITableViewController {
     
     @IBAction func Exit (_ segue: UIStoryboardSegue) {
         if let selectIndexPath = tableView.indexPathForSelectedRow {
-            deleteRecord(id: (resultList[selectIndexPath.row].id)!, row: selectIndexPath.row)
+            deleteRecord(id: (resultList[resultList.count - selectIndexPath.row - 1].id)!, row: selectIndexPath.row)
         }
     }
 
@@ -164,7 +164,7 @@ class HistoryTableViewController: UITableViewController {
                 if result == "success" {
                     DispatchQueue.main.async {
                         //row改成self.resultList.count - row - 1
-                        self.resultList.remove(at: row)
+                        self.resultList.remove(at: self.resultList.count - row - 1)
 //                        self.tableView.reloadData()
 //                        self.loadHistory(page: self.resultPage)
                         self.tableView.reloadData()
@@ -220,16 +220,16 @@ class HistoryTableViewController: UITableViewController {
     //tableView.reloadData()后会调用该方法
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        //indexPath.row改成self.resultList.count - row - 1
-        let reason = resultList[indexPath.row].reason
+        
+        let reason = resultList[self.resultList.count - indexPath.row - 1].reason   //indexPath.row改成self.resultList.count - indexPath.row - 1
         if reason?.count ?? 0 > 15 {         //此为超过15个字符的情况
             let r = reason?.prefix(15)      //截取reason文本的前15个字符
             cell.textLabel?.text = String(r!) + "..."     //则显示为前15个字符+“...”
         } else {
             cell.textLabel?.text = reason
         }
-        //indexPath.row改成self.resultList.count - row - 1
-        cell.detailTextLabel?.text = resultList[indexPath.row].name! + "(" + self.getWeek(date: resultList[indexPath.row].date!) + ")"
+        //indexPath.row改成resultList.count - indexPath.row - 1 两个地方改了
+        cell.detailTextLabel?.text = resultList[resultList.count - indexPath.row - 1].name! + "(" + self.getWeek(date: resultList[resultList.count - indexPath.row - 1].date!) + ")"
 
         return cell
     }
@@ -254,8 +254,8 @@ class HistoryTableViewController: UITableViewController {
 //            tableView.deleteRows(at: [indexPath], with: .fade)
 //            resultList.remove(at: indexPath.row)
 //            tableView.reloadData()
-            //indexPath.row改成self.resultList.count - row - 1
-            deleteRecord(id: (resultList[indexPath.row].id)!, row: indexPath.row)
+            //indexPath.row改成self.resultList.count - indexPath.row - 1 改一处，第一个地方
+            deleteRecord(id: (resultList[self.resultList.count - indexPath.row - 1].id)!, row: indexPath.row)
         } else if editingStyle == .insert {
 //            loadHistory(page: resultPage)
 
@@ -284,6 +284,7 @@ class HistoryTableViewController: UITableViewController {
     
     // MARK: - Navigation
 
+    //点击cell，跳转到历史事由，即详情页（包括卜卦日期、用神、事由、姓名和备注）
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -292,7 +293,7 @@ class HistoryTableViewController: UITableViewController {
             let destination = segue.destination as! HistoryReasonViewController
             if let cell = sender as? UITableViewCell {
                 let indexPath = tableView.indexPath(for: cell)
-                let result = resultList[(indexPath)!.row]  // (indexPath)!.row改成resultList.count - (indexPath)!.row - 1
+                let result = resultList[resultList.count - (indexPath)!.row - 1]  // (indexPath)!.row改成resultList.count - (indexPath)!.row - 1
                 destination.gua = result
             }
         }
