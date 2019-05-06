@@ -48,6 +48,8 @@ class HistoryTableViewController: UITableViewController {
         tableView.reloadData()
         
         refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString.init(string: "下拉刷新")
+        refresher.tintColor = .lightGray
         refresher?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refresher)
         // Uncomment the following line to preserve selection between presentations
@@ -58,15 +60,16 @@ class HistoryTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if !(GlobalUser.online ?? false) {
-            return
-        } else {
-            resultList = []
-            self.resultPage = 1
-            loadHistory(page: resultPage)
-            tableView.reloadData()
-        }
-        
+//        if !(GlobalUser.online ?? false) {
+//            return
+//        } else {
+//            resultList = []
+//            self.resultPage = 1
+//            loadHistory(page: resultPage)
+//            tableView.reloadData()
+//        }
+//        loadHistory(page: resultPage)
+//        tableView.reloadData()
         
     }
     
@@ -159,7 +162,10 @@ class HistoryTableViewController: UITableViewController {
                 let result = respJson.object(forKey: "result") as? String
                 if result == "success" {
                     DispatchQueue.main.async {
-                        self.resultList.remove(at: row)
+                        //self.resultList.count - row - 1
+                        self.resultList.remove(at: self.resultList.count - row - 1)
+//                        self.tableView.reloadData()
+//                        self.loadHistory(page: self.resultPage)
                         self.tableView.reloadData()
                     }
                 }
@@ -213,14 +219,14 @@ class HistoryTableViewController: UITableViewController {
     //tableView.reloadData()后会调用该方法
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        let reason = resultList[indexPath.row].reason
+        let reason = resultList[resultList.count - indexPath.row - 1].reason
         if reason?.count ?? 0 > 15 {         //此为超过15个字符的情况
             let r = reason?.prefix(15)      //截取reason文本的前15个字符
             cell.textLabel?.text = String(r!) + "..."     //则显示为前15个字符+“...”
         } else {
             cell.textLabel?.text = reason
         }
-        cell.detailTextLabel?.text = resultList[indexPath.row].name! + "(" + self.getWeek(date: resultList[indexPath.row].date!) + ")"
+        cell.detailTextLabel?.text = resultList[resultList.count - indexPath.row - 1].name! + "(" + self.getWeek(date: resultList[resultList.count - indexPath.row - 1].date!) + ")"
 
         return cell
     }
@@ -245,8 +251,12 @@ class HistoryTableViewController: UITableViewController {
 //            tableView.deleteRows(at: [indexPath], with: .fade)
 //            resultList.remove(at: indexPath.row)
 //            tableView.reloadData()
-            deleteRecord(id: (resultList[indexPath.row].id)!, row: indexPath.row)
+            deleteRecord(id: (resultList[resultList.count - indexPath.row - 1].id)!, row: indexPath.row)
         } else if editingStyle == .insert {
+            loadHistory(page: resultPage)
+
+            tableView.reloadData()
+
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
@@ -278,11 +288,17 @@ class HistoryTableViewController: UITableViewController {
             let destination = segue.destination as! HistoryReasonViewController
             if let cell = sender as? UITableViewCell {
                 let indexPath = tableView.indexPath(for: cell)
-                let result = resultList[(indexPath)!.row]
+                let result = resultList[resultList.count - (indexPath)!.row - 1]
                 destination.gua = result
             }
         }
+        
     }
+    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        //单击单元格后灰色高亮后逐渐变淡消失
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
  
     @objc func refresh() {
         loadHistory(page: resultPage)
@@ -292,11 +308,45 @@ class HistoryTableViewController: UITableViewController {
         refresher.endRefreshing()
     }
 
-    func loadMore() {
-        //只要是page的数量小于等于帖子的数量，则让用户在每次拉拽集合视图到底部的时候，让page的数量加12
-        if resultPage <= resultList.count {
-            resultPage = resultPage + 12
-            
-        }
-    }
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.contentOffset.y >= scrollView.contentSize.height - self.view.frame.height {
+//            self.loadMore()
+//        }
+//    }
+    
+//    func loadMore() {
+//        //只要是page的数量小于等于帖子的数量，则让用户在每次拉拽集合视图到底部的时候，让page的数量加12
+//        if resultPage <= resultList.count {
+//            resultPage = resultPage + 15
+//            loadHistory(page: resultPage)
+//        }
+//    }
+    
+//    -(void)doubleClickTab:(NSNotification *)notification{
+//
+//    //这里有个坑 就是直接用NSInteger接收会有问题 数字不对
+//    //因为上个界面传过来的时候封装成了对象，所以用NSNumber接收后再取值
+//    NSNumber *index = notification.object;
+//
+//    if ([index intValue] == 1) {
+//    //刷新
+//    //animated不要为YES，否则菊花会卡死
+//    [self.newsTableView setContentOffset:CGPointMake(0, self.newsTableView.contentOffset.y - self.newsTableView.refreshControl.frame.size.height) animated:NO];
+//
+//    [self.newsTableView.refreshControl beginRefreshing];
+//
+//    [self.newsTableView.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
+//    }
+//
+//    }
+    
+//    func doubleClickTab(notification:NSNotification){
+//        let index:NSNumber = notification.object as! NSNumber
+//        if index.intValue == 1 {
+//            self.tableView.setContentOffset(CGPoint(x: 0, y: self.tableView.contentOffset.y - (self.refresher.frame.size.height)), animated: false)
+//            self.refresher.beginRefreshing()
+//            self.refresher.sendActions(for: .valueChanged)
+//            self.refresher.endRefreshing()
+//        }
+//    }
 }
