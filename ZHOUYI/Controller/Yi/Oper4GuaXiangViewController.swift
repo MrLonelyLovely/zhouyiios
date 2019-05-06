@@ -347,11 +347,11 @@ class Oper4GuaXiangViewController: UIViewController {
         
         for i in 0...7 {
             SButtonList[i].setImage(UIImage(named: "unselected\(i)"), for: .normal)
-            SButtonList[i].setImage(UIImage(named: "selected\(i)"), for: .selected)
+            SButtonList[i].setImage(UIImage(named: "unselected\(i)"), for: .selected)
             SButtonList[i].addTarget(self, action: #selector(buttonCliked(btn:)), for: .touchUpInside)
             
             XButtonList[i].setImage(UIImage(named: "unselected\(i)"), for: .normal)
-            XButtonList[i].setImage(UIImage(named: "selected\(i)"), for: .selected)
+            XButtonList[i].setImage(UIImage(named: "unselected\(i)"), for: .selected)
             XButtonList[i].addTarget(self, action: #selector(buttonCliked(btn:)), for: .touchUpInside)
         }
         
