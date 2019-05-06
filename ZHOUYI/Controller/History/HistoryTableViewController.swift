@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftHTTP
+//阿沛的
 
 class HistoryTableViewController: UITableViewController {
     
@@ -16,7 +17,7 @@ class HistoryTableViewController: UITableViewController {
     let RowHeight: CGFloat = 50
     
     //刷新控件
-    var refresher: UIRefreshControl!
+//    var refresher: UIRefreshControl!
     
     @IBAction func Exit (_ segue: UIStoryboardSegue) {
         if let selectIndexPath = tableView.indexPathForSelectedRow {
@@ -44,14 +45,15 @@ class HistoryTableViewController: UITableViewController {
 //            loadHistory(page: resultPage)
 //        }
         
-        loadHistory(page: resultPage)
-        tableView.reloadData()
+//        loadHistory(page: resultPage)
+//        tableView.reloadData()
         
-        refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString.init(string: "下拉刷新")
-        refresher.tintColor = .lightGray
-        refresher?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
-        tableView?.addSubview(refresher)
+//        refresher = UIRefreshControl()
+//        refresher.attributedTitle = NSAttributedString.init(string: "下拉刷新")
+//        refresher.tintColor = .lightGray
+//        refresher?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+//        tableView?.addSubview(refresher)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -60,17 +62,17 @@ class HistoryTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        if !(GlobalUser.online ?? false) {
-//            return
-//        } else {
-//            resultList = []
-//            self.resultPage = 1
-//            loadHistory(page: resultPage)
+        if !(GlobalUser.online ?? false) {
+            return
+        } else {
+            resultList = []
+            self.resultPage = 1
+            loadHistory(page: resultPage)
 //            tableView.reloadData()
-//        }
+        }
 //        loadHistory(page: resultPage)
 //        tableView.reloadData()
-        
+//
     }
     
     
@@ -137,10 +139,9 @@ class HistoryTableViewController: UITableViewController {
 //                        .reversed()
                         for s in record {
                             self.resultList.append(Gua(initJson: s))
-                            self.tableView.reloadData()
 //                            self.resultList.first = Gua(initJson: s)
                         }
-                        
+                        self.tableView.reloadData()
                     }
                 }
             } catch {
@@ -162,8 +163,8 @@ class HistoryTableViewController: UITableViewController {
                 let result = respJson.object(forKey: "result") as? String
                 if result == "success" {
                     DispatchQueue.main.async {
-                        //self.resultList.count - row - 1
-                        self.resultList.remove(at: self.resultList.count - row - 1)
+                        //row改成self.resultList.count - row - 1
+                        self.resultList.remove(at: row)
 //                        self.tableView.reloadData()
 //                        self.loadHistory(page: self.resultPage)
                         self.tableView.reloadData()
@@ -219,14 +220,16 @@ class HistoryTableViewController: UITableViewController {
     //tableView.reloadData()后会调用该方法
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        let reason = resultList[resultList.count - indexPath.row - 1].reason
+        //indexPath.row改成self.resultList.count - row - 1
+        let reason = resultList[indexPath.row].reason
         if reason?.count ?? 0 > 15 {         //此为超过15个字符的情况
             let r = reason?.prefix(15)      //截取reason文本的前15个字符
             cell.textLabel?.text = String(r!) + "..."     //则显示为前15个字符+“...”
         } else {
             cell.textLabel?.text = reason
         }
-        cell.detailTextLabel?.text = resultList[resultList.count - indexPath.row - 1].name! + "(" + self.getWeek(date: resultList[resultList.count - indexPath.row - 1].date!) + ")"
+        //indexPath.row改成self.resultList.count - row - 1
+        cell.detailTextLabel?.text = resultList[indexPath.row].name! + "(" + self.getWeek(date: resultList[indexPath.row].date!) + ")"
 
         return cell
     }
@@ -251,11 +254,12 @@ class HistoryTableViewController: UITableViewController {
 //            tableView.deleteRows(at: [indexPath], with: .fade)
 //            resultList.remove(at: indexPath.row)
 //            tableView.reloadData()
-            deleteRecord(id: (resultList[resultList.count - indexPath.row - 1].id)!, row: indexPath.row)
+            //indexPath.row改成self.resultList.count - row - 1
+            deleteRecord(id: (resultList[indexPath.row].id)!, row: indexPath.row)
         } else if editingStyle == .insert {
-            loadHistory(page: resultPage)
+//            loadHistory(page: resultPage)
 
-            tableView.reloadData()
+//            tableView.reloadData()
 
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -288,7 +292,7 @@ class HistoryTableViewController: UITableViewController {
             let destination = segue.destination as! HistoryReasonViewController
             if let cell = sender as? UITableViewCell {
                 let indexPath = tableView.indexPath(for: cell)
-                let result = resultList[resultList.count - (indexPath)!.row - 1]
+                let result = resultList[(indexPath)!.row]  // (indexPath)!.row改成resultList.count - (indexPath)!.row - 1
                 destination.gua = result
             }
         }
@@ -300,13 +304,13 @@ class HistoryTableViewController: UITableViewController {
 //        tableView.deselectRow(at: indexPath, animated: true)
 //    }
  
-    @objc func refresh() {
-        loadHistory(page: resultPage)
-        tableView?.reloadData()
-        
-        //停止刷新动画
-        refresher.endRefreshing()
-    }
+//    @objc func refresh() {
+//        loadHistory(page: resultPage)
+//        tableView?.reloadData()
+//
+//        //停止刷新动画
+//        refresher.endRefreshing()
+//    }
 
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        if scrollView.contentOffset.y >= scrollView.contentSize.height - self.view.frame.height {

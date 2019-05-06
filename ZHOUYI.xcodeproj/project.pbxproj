@@ -610,7 +610,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhenming.zhouyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "test zhouyi distribution";
+				PROVISIONING_PROFILE_SPECIFIER = test_zhouyi_v4;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -631,7 +631,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhenming.zhouyi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "test zhouyi distribution";
+				PROVISIONING_PROFILE_SPECIFIER = test_zhouyi_v4;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
