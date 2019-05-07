@@ -45,6 +45,8 @@ class HistoryReasonViewController: UIViewController {
         DeleteButton.layer.masksToBounds = true
         DeleteButton.layer.cornerRadius = 5
         
+        DeleteButton.isHidden = true
+        DeleteButton.isUserInteractionEnabled = false
         switch gua?.method {
         case "LiuYao":
             MethodLabel.text = "六爻"

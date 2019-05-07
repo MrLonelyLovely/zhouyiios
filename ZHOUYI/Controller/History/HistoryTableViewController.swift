@@ -20,14 +20,17 @@ class HistoryTableViewController: UITableViewController {
 //    var refresher: UIRefreshControl!
     
     @IBAction func Exit (_ segue: UIStoryboardSegue) {
-        if let selectIndexPath = tableView.indexPathForSelectedRow {
-            deleteRecord(id: (resultList[resultList.count - selectIndexPath.row - 1].id)!, row: selectIndexPath.row)
-        }
+//        if let selectIndexPath = tableView.indexPathForSelectedRow {
+//            deleteRecord(id: (resultList[resultList.count - selectIndexPath.row - 1].id)!, row: selectIndexPath.row)
+//        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        var date = Date().timeInterval
+//        let date = NSDate()
+//        let date1 = date.
         GlobalUser.loadUserInfo()
         if !(GlobalUser.online ?? false) && (GlobalUser.login ?? false) {
             authenticateToken()
@@ -130,7 +133,7 @@ class HistoryTableViewController: UITableViewController {
                 let reason = respJson.object(forKey: "reason") as? String
                 if (result == "success") {
                     let record = respJson.object(forKey: "record") as! [AnyObject]
-                    self.resultPage += 1
+//                    self.resultPage += 1
                     DispatchQueue.main.async {
 //                        for s in stride(from: 0, to:record.count, by: -1) {
 //                            self.resultList.append(Gua(initJson: s as AnyObject))

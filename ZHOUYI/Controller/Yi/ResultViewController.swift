@@ -37,26 +37,26 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBOutlet weak var BenGua4: UIImageView!
     @IBOutlet weak var BenGua5: UIImageView!
     var BenGuaList: [UIImageView] = []
-    // 装卦Zg
+    // 装卦Zg，即六冲左
     @IBOutlet weak var ZgHeader: UILabel!
-    @IBOutlet weak var ZgTianGan0: UILabel!
-    @IBOutlet weak var ZgTianGan1: UILabel!
+    @IBOutlet weak var ZgTianGan0: UILabel!     //我猜是十天干的其中一个 //甲、乙、丙、丁、戊、己、庚、辛、壬、癸被称为“十天干”，癸（gui三声）
+    @IBOutlet weak var ZgTianGan1: UILabel!     //我猜是十天干的其中一个
     var ZgTianGanList: [UILabel] = []
-    @IBOutlet weak var ZgDiZhi0: UIButton!
+    @IBOutlet weak var ZgDiZhi0: UIButton!    //会显示12地支中的六个：寅、卯、辰、巳、午、未、申、酉、戌、亥、子、丑
     @IBOutlet weak var ZgDiZhi1: UIButton!
     @IBOutlet weak var ZgDiZhi2: UIButton!
     @IBOutlet weak var ZgDiZhi3: UIButton!
     @IBOutlet weak var ZgDiZhi4: UIButton!
     @IBOutlet weak var ZgDiZhi5: UIButton!
     var ZgDiZhiList: [UIButton] = []
-    var ZgList: [[String]] = [] // 0:地支, 1:五行, 2:轮转1列, 3:轮转2列
+    var ZgList: [[String]] = [] // 0:地支, 1:五行, 2:轮转1列, 3:轮转2列  //不止四种情况呀？没看懂hh
     var ZgTurn: Int = 1 // 显示轮转
-    // 变卦Bg
+    // 变卦Bg，即六冲右
     @IBOutlet weak var BgHeader: UILabel!
-    @IBOutlet weak var BgTianGan0: UILabel!
-    @IBOutlet weak var BgTianGan1: UILabel!
+    @IBOutlet weak var BgTianGan0: UILabel!    //我猜是十天干的其中一个
+    @IBOutlet weak var BgTianGan1: UILabel!    //我猜是十天干的其中一个
     var BgTianGanList: [UILabel] = []
-    @IBOutlet weak var BgHuiKe0: UIButton!
+    @IBOutlet weak var BgHuiKe0: UIButton!     //回克、化退、化进、回生。。之一
     @IBOutlet weak var BgHuiKe1: UIButton!
     @IBOutlet weak var BgHuiKe2: UIButton!
     @IBOutlet weak var BgHuiKe3: UIButton!
@@ -78,9 +78,9 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBOutlet weak var BgLiuQin4: UIButton!
     @IBOutlet weak var BgLiuQin5: UIButton!
     var BgLiuQinList: [UIButton] = []
-    var BgTurn: Bool = false
-    var BgShow: [Int] = []
-    // 伏神Fs
+    var BgTurn: Bool = false                 //干嘛的？
+    var BgShow: [Int] = []                   //干嘛的？
+    // 伏神Fs，每个卜卦结果会有相对应的两个伏神结果
     @IBOutlet weak var FsHeader: UILabel!
     @IBOutlet weak var FsTianGan0: UILabel!
     @IBOutlet weak var FsTianGan1: UILabel!
@@ -145,7 +145,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBOutlet weak var TheReason: UILabel!
     @IBOutlet weak var TheNote: UILabel!
     // 卜卦事由
-    @IBOutlet weak var TheDate: UILabel!
+    @IBOutlet weak var TheDate: UILabel!         //下部分，要改，卜卦时间，去秒
     @IBOutlet weak var TheYongShen: UILabel!
     @IBOutlet weak var TheName: UILabel!
     // 日冲月破RY
@@ -159,7 +159,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBOutlet weak var RYBen: UILabel!   // 本
     // 占
     // 标题Title
-    @IBOutlet weak var ZhanTitle0: UILabel!
+    @IBOutlet weak var ZhanTitle0: UILabel!    //亡神、日德、天喜、贵人等
     @IBOutlet weak var ZhanTitle1: UILabel!
     @IBOutlet weak var ZhanTitle2: UILabel!
     @IBOutlet weak var ZhanTitle3: UILabel!
@@ -177,7 +177,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBOutlet weak var ZhanTitle15: UILabel!
     var ZhanTitleList: [UILabel] = []
     // 干支GZ
-    @IBOutlet weak var ZhanGZ0: UILabel!
+    @IBOutlet weak var ZhanGZ0: UILabel!     //丑、巳、亥等
     @IBOutlet weak var ZhanGZ1: UILabel!
     @IBOutlet weak var ZhanGZ2: UILabel!
     @IBOutlet weak var ZhanGZ3: UILabel!
@@ -198,7 +198,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     let ZhanList: [String] = ["常用神煞", "占感情", "占疾病", "占官禄", "占求财", "占胎孕", "占官非"]
     
     // 控件功能
-    // 装卦轮转
+    // 装卦轮转，即第四列
     @IBAction func ClickZgButton0(_ sender: Any) {
         turnZhuangGua()
     }
@@ -217,7 +217,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBAction func ClickZgButton5(_ sender: Any) {
         turnZhuangGua()
     }
-    // 变卦轮转
+    // 变卦轮转，即第五列（里面含四小列，其中一列label，三列button），共18个按钮，每一小列6个按钮
     @IBAction func ClickBgButton00(_ sender: Any) {
         turnBianGua()
     }
@@ -272,7 +272,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     @IBAction func ClickBgButton25(_ sender: Any) {
         turnBianGua()
     }
-    // 伏神轮转
+    // 伏神轮转，12个按钮
     @IBAction func ClickFsButton00(_ sender: Any) {
         turnFuShen()
     }
@@ -461,7 +461,7 @@ class ResultViewController: UIViewController, UIScrollViewDelegate, UITableViewD
     override func viewDidAppear(_ animated: Bool) {
         let width = Scroll.frame.size.width
         let height = Scroll.frame.size.height
-        Scroll.contentSize = CGSize(width: width * 3, height: height)
+        Scroll.contentSize = CGSize(width: width * 3, height: height)      //（展示）内容大小
         Stack.frame = CGRect(x: 0, y: 0, width: width * 3, height: height)
         Scroll.contentOffset.x +=  Scroll.frame.width
     }
