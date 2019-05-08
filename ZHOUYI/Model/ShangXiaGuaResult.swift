@@ -6,8 +6,8 @@
 //  Copyright © 2019 FENGYX. All rights reserved.
 //
 
-import Foundation
-
+//import Foundation
+import UIKit
 
 /*
  enum ShangXiaGuaResult:String{
